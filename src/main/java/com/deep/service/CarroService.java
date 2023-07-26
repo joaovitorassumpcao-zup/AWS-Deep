@@ -1,6 +1,7 @@
 package com.deep.service;
 
 import java.math.BigDecimal;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.sql.Timestamp;
@@ -34,6 +35,44 @@ public class CarroService {
 
     public void delete(String placa) {
         String sql = String.format("DELETE FROM controle_carros WHERE placa = '&s'", placa);
-        try
+        try {
+            statement.executeUpdate(sql);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public void update(String placa, String coluna, String valor) {
+        if(!coluna.equalsIgnoreCase("placa")) {
+            String sql = String.format("UPDATE controle_carros SET %s = '%s' WHERE placa = '%s'",
+                    coluna, valor, placa);
+            try {
+                statement.executeUpdate(sql);
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
+            }
+        } else {
+            System.out.println("Não é permitido mudar a placa!");
+        }
+    }
+
+    public void list() {
+        String sql = "SELECT * FROM controle_carros ORDER BY data_entrada";
+        try {
+            ResultSet resultSet = statement.executeQuery(sql);
+            while(resultSet.next()) {
+                String line = String.format("| %s |" +
+                                " %s |" +
+                                " %s |" +
+                                " %s |",
+                        resultSet.getString("placa"),
+                        resultSet.getString("marca"),
+                        resultSet.getString("modelo"),
+                        resultSet.getTimestamp("data_entrada"));
+                System.out.println(line);
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 }
