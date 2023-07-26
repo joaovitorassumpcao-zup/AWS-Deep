@@ -19,6 +19,18 @@ Você precisará criar uma aplicação utilizando o banco de dados compartilhado
 - Você junto ao seu grupo precisarão discutir como será a arquitetura do banco de vocês, documente essa discussão.
 - Crie uma documentação explicando como funciona o seu projeto.
 
+## Projeto - Documentação
+A tela inicial lista todos os carros no banco de dados e apresenta as seguites opções:
+1. Adicionar
+   - Requisita e adiciona o minímo de dados do carro:
+     - Placa
+     - Marca
+     - Modelo
+     - Data e hora de entrada
+2. Atualizar
+   - Requisa a coluna a ser atualizada, a placa, e o valor atualizado.
+3. Deletar
+   - Requisita a placa do carro a ser deletado e o deleta.
 
 ## Banco de Dados - Documentação
 O projeto utiliza um banco de dados PostgreSQL hospedado no Amazon RDS para armazenar as informações dos carros estacionados.
